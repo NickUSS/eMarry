@@ -1,0 +1,6 @@
+me\emojiado\emarry\commands\admin\ReloadCMD.class
+me\emojiado\emarry\configuration\ConfigUtil.class
+me\emojiado\emarry\player\MarryPlayer.class
+me\emojiado\emarry\database\Database.class
+me\emojiado\emarry\events\PlayerMarryEvent.class
+me\emojiado\emarry\EMarry.class

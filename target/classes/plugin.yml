@@ -1,0 +1,9 @@
+name: eMarry
+version: '1.0-SNAPSHOT'
+main: me.emojiado.emarry.EMarry
+author: Emojiado
+
+commands:
+  emarry:
+    description: Comando principal de casamiento.
+    permission: emarry.reload
