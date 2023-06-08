@@ -20,13 +20,13 @@ public class ReloadCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission(permission)) {
-            configUtil.sendMessage(sender, "no_permissions");
+            configUtil.sendMessage(sender, "no-permissions");
             return true;
         }
 
         if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
             configUtil.reloadConfigFiles();
-            configUtil.sendMessage(sender, "reload_success");
+            configUtil.sendMessage(sender, "reload-success");
             return true;
         }
 

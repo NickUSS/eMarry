@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class ConfigUtil {
@@ -93,6 +95,26 @@ public class ConfigUtil {
         } else {
             plugin.getLogger().warning("Attempted to send a message to a non-player sender.");
         }
+    }
+
+    public List<String> getMessageList(String path) {
+        List<String> messages = messagesFile.getStringList(path);
+        if (messages != null && !messages.isEmpty()) {
+            List<String> formattedMessages = new ArrayList<>();
+            for (String message : messages) {
+                formattedMessages.add(ChatColor.translateAlternateColorCodes('&', message));
+            }
+            return formattedMessages;
+        }
+        return null;
+    }
+
+    public String formatMessageList(List<String> messages) {
+        StringBuilder sb = new StringBuilder();
+        for (String message : messages) {
+            sb.append(message).append("\n");
+        }
+        return sb.toString().trim();
     }
 }
 

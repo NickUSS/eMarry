@@ -7,3 +7,5 @@ commands:
   emarry:
     description: Comando principal de casamiento.
     permission: emarry.reload
+  marry:
+    description: Comando para enviar solicitud de casamiento.

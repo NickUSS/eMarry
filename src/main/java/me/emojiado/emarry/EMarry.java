@@ -2,13 +2,11 @@ package me.emojiado.emarry;
 
 import lombok.Getter;
 import me.emojiado.emarry.commands.admin.ReloadCMD;
+import me.emojiado.emarry.commands.player.MarryCommand;
 import me.emojiado.emarry.configuration.ConfigUtil;
-import me.emojiado.emarry.database.Database;
+import me.emojiado.emarry.player.MarryPlayer;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public final class EMarry extends JavaPlugin {
 
@@ -18,35 +16,24 @@ public final class EMarry extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        MarryPlayer.loadData();
 
         // Configuration
         configUtil = new ConfigUtil(this);
         configUtil.reloadConfigFiles();
-        Database.setConfigUtil(configUtil);
-
-        // Database
-        try {
-            Class.forName ("org.mariadb.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            Connection connection = Database.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         // Register the command
         CommandExecutor reloadCommand = new ReloadCMD(this, configUtil, "emarry.reload");
+        CommandExecutor marryCommand = new MarryCommand(this, configUtil);
+
         getCommand("emarry").setExecutor(reloadCommand);
+        getCommand("marry").setExecutor(marryCommand);
     }
 
     @Override
     public void onDisable() {
         instance = null;
-
-        // Save the configuration files on plugin disable
+        MarryPlayer.saveData();
         configUtil.saveConfigFiles();
     }
 }
